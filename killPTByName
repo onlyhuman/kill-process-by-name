@@ -1,3 +1,10 @@
 #!/bin/bash
-PID=`ps | grep -i $1 | awk '{print $1}'`
-pkill -TERM -P ${PID}
+if [[ $# -eq 0 ]] ; then
+        echo "Please provider the script name to search for! "
+        echo "Usage: $0 processNameToKill"
+
+else
+        PID=`ps | grep -i $1 | awk '{print $1}'`
+        echo 'Killing process tree by its parent PID: ${PID}'
+        pkill -TERM -P ${PID}
+fi
